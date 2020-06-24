@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import Layout from '../components/Layout';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import authContext from '../context/auth/authContext';
+import Alert from '../components/Alert';
+import {useRouter} from 'next/router';
 
 const Login = () => {
+
+  const {message, logIn, authenticated} = useContext(authContext);
+
+  const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -18,9 +25,11 @@ const Login = () => {
             .required("Password cannot be empty")
         }),
         onSubmit: (values) => {
-          console.log(values);
+          logIn(values);
         },
       });
+
+    if (authenticated) router.push('/');
 
     return (
         <Layout>
@@ -28,6 +37,7 @@ const Login = () => {
           <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
             Log In
           </h2>
+          {message && <Alert />}
           <div className="flex justify-center mt-5">
             <div className="max-w-lg w-full">
               <form

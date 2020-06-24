@@ -2,17 +2,22 @@ import React, { useReducer } from "react";
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
 
-import axiosClient from "../../config/axios";
-
 import {
   AUTH_USER,
   REGISTER_SUCCEED,
   REGISTER_ERROR,
   CLEAN_ALERT,
+  LOGIN_ERROR,
+  LOGIN_SUCCEED,
+  LOGOUT,
 } from "../../types";
 
+import axiosClient from "../../config/axios";
+import tokenAuth from "../../config/tokenAuth";
+
 const initialState = {
-  token: "",
+  token:
+    typeof window !== "undefined" ? localStorage.getItem("rs_token") : null,
   authenticated: null,
   user: null,
   message: null,
@@ -41,11 +46,45 @@ const AuthState = ({ children }) => {
     }, 3000);
   };
 
-  const authUser = (name) => {
-    dispatch({
-      type: AUTH_USER,
-      payload: name,
-    });
+  const logIn = async (loginData) => {
+    try {
+      const response = await axiosClient.post("/api/auth", loginData);
+
+      dispatch({
+        type: LOGIN_SUCCEED,
+        payload: response.data.token,
+      });
+    } catch (err) {
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
+
+    setTimeout(() => {
+      dispatch({ type: CLEAN_ALERT });
+    }, 3000);
+  };
+
+  const authUser = async () => {
+    const token = localStorage.getItem("rs_token");
+    if (token) {
+      tokenAuth(token);
+    }
+
+    try {
+      const response = await axiosClient.get("/api/auth");
+      dispatch({
+        type: AUTH_USER,
+        payload: response.data.user,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const logOut = () => {
+    dispatch({ type: LOGOUT });
   };
 
   return (
@@ -57,6 +96,8 @@ const AuthState = ({ children }) => {
         message: state.message,
         authUser,
         createUser,
+        logIn,
+        logOut,
       }}
     >
       {children}
