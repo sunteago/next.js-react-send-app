@@ -8,8 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "formik": "^2.1.4",
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "yup": "^0.29.1"
   }
 }
