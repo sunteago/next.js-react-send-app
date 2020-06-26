@@ -1,6 +1,7 @@
 export const REGISTER_SUCCEED = "REGISTER_SUCCEED";
 export const REGISTER_ERROR = "REGISTER_ERROR";
 
+export const SHOW_ALERT = "SHOW_ALERT";
 export const CLEAN_ALERT = "CLEAN_ALERT";
 
 export const LOGIN_SUCCEED = "LOGIN_SUCCEED";
@@ -8,3 +9,12 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGOUT = "LOGOUT";
  
 export const AUTH_USER = "AUTH_USER";
+
+export const UPLOADING_FILE_INIT = "UPLOADING_FILE_INIT";
+export const UPLOAD_FILE_SUCCEED = "UPLOAD_FILE_SUCCEED";
+export const UPLOAD_FILE_ERROR = "UPLOAD_FILE_ERROR";
+
+export const GENERATE_LINK_SUCCEED = "GENERATE_LINK_SUCCEED";
+export const GENERATE_LINK_ERROR = "GENERATE_LINK_ERROR";
+
+export const CLEAN_STATE = "CLEAN_STATE";
