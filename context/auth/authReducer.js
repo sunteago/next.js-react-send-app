@@ -23,7 +23,7 @@ export default (state, action) => {
         authenticated: true,
       };
     case AUTH_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, authenticated: true };
     case CLEAN_ALERT:
       return { ...state, message: null };
     case LOGOUT:

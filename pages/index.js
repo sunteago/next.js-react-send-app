@@ -12,7 +12,10 @@ const Index = () => {
   const { fileMessage, url } = useContext(appContext);
 
   useEffect(() => {
-    authUser();
+    const token = localStorage.getItem('token');
+    if (token) {
+      authUser();
+    }
   }, []);
 
   const fullUrl = () => (`${process.env.frontendURL}/links/${url}`)
