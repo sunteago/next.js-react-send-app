@@ -6,6 +6,8 @@ import {
   UPLOADING_FILE_INIT,
   GENERATE_LINK_SUCCEED,
   CLEAN_STATE,
+  ADD_PASSWORD,
+  ADD_DOWNLOAD_NUMBER,
 } from "../../types";
 
 export default (state, action) => {
@@ -42,6 +44,13 @@ export default (state, action) => {
         url: "",
         author: null,
       };
+    case ADD_PASSWORD:
+      return {
+        ...state,
+        password: action.payload,
+      };
+    case ADD_DOWNLOAD_NUMBER:
+      return { ...state, downloads: action.payload };
     default:
       return state;
   }

@@ -55,7 +55,7 @@ const AuthState = ({ children }) => {
         payload: response.data.token,
       });
     } catch (err) {
-      dispatch({
+      dispatch({  
         type: LOGIN_ERROR,
         payload: err.response.data.msg,
       });

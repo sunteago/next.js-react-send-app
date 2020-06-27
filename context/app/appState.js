@@ -10,6 +10,8 @@ import {
   CLEAN_ALERT,
   GENERATE_LINK_SUCCEED,
   CLEAN_STATE,
+  ADD_PASSWORD,
+  ADD_DOWNLOAD_NUMBER
 } from "../../types";
 
 const initialState = {
@@ -82,6 +84,20 @@ const AppState = ({ children }) => {
     dispatch({ type: CLEAN_STATE });
   };
 
+  const addPassword = password => {
+    dispatch({
+      type: ADD_PASSWORD,
+      payload: password
+    })    
+  };
+
+  const addDownloadNumber = downloads => {
+    dispatch({
+      type: ADD_DOWNLOAD_NUMBER,
+      payload: parseInt(downloads)
+    })
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -97,6 +113,8 @@ const AppState = ({ children }) => {
         uploadFile,
         createLink,
         cleanState,
+        addPassword,
+        addDownloadNumber
       }}
     >
       {children}
